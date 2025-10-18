@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Bell, Ticket } from "lucide-react";
+import NavLink from "./compos/nav-link";
+import { ThemeProvider } from "@/components/theme-provider"
+import { ModeToggle } from "@/components/mode-toggle";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,12 +29,59 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`} 
       >
+         <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+        <section className="flex items-center justify-start  flex-col w-full gap-2">
+        <Navigation />
         {children}
+        </section>
+          </ThemeProvider>
       </body>
     </html>
   );
+}
+
+export function Navigation(){
+  return   <div className="w-full flex items-center justify-between gap-4 bg-background p-2 border-b border-border" >
+      <div className="flex items-center justify-center gap-2 text-xl font-bold">
+          <p className="w-full ">
+            Ticket Support For IT
+          </p>
+      </div>
+    <div className="flex items-center justify-end  gap-2  ">
+      <div className="px-4">
+        <NavLink  href={'/my-tickets'}>
+         <p  className="hover:border-primary cursor-pointer" >My Tickets  </p>
+        </NavLink>
+      </div>
+      <div className="px-4">
+        
+        <NavLink  href={'/tickets'}>
+         <p  className="hover:border-primary cursor-pointer" > Tickets  </p>
+        </NavLink>
+      </div>
+      <div className="px-4">
+      <NavLink  href={'/agents'}>
+         <p  className="cursor-pointer" > Agents  </p>
+        </NavLink>   
+
+        </div>
+      <div className="flex items-center justify-center gap-2 px-4">
+        <Bell className="w-4 h-4 hover:text-primary cursor-pointer"  />
+        <ModeToggle/>
+        <Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+      </div>
+    </div>
+    </div>
 }

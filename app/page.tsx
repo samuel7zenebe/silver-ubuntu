@@ -1,9 +1,8 @@
-import { Ticket, TicketPlus } from "lucide-react";
+import { Bell, Ticket, TicketPlus } from "lucide-react";
+import Link from "next/link";
 
 export default async function Home() {
   return (
-    <div className="">
-         <h1 className="p-2 bg-slate-950 text-white font-bold"> Ticket Support System  <Ticket  className="inline w-5 h-5" /> </h1>
-    </div>
+         <h1> Home Page </h1>
   );
 }
